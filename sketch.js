@@ -169,7 +169,7 @@ function mouseMoved() {
         hoverActive = false;
         hoverSfxAudio.pause();
         hoverSfxAudio.currentTime = 0;
-      }, 200);
+      }, 2000);
     }
 }
 
