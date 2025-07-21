@@ -19,11 +19,13 @@ let defaultColor;
 
 //audio
 let ambienceAudio, hoverSfxAudio;
+// --- MODIFIED: Added a variable for the click sound ---
+let clickSfxAudio; 
 let ambienceStarted = false;
 let hoverActive = false;
 let hoverTimeout;
 
-// --- MODIFIED: Added state variables for sound and modal ---
+// state variables
 let isModalOpen = false;
 let isSfxEnabled = false;
 
@@ -81,8 +83,12 @@ function setup() {
   hoverSfxAudio = new Audio('assets/COMM2754-2025-S1-A1w02-Earth-HoDucDuy-hover.wav');
   hoverSfxAudio.loop = true;
   hoverSfxAudio.volume = 0.6;
+  
+  // --- MODIFIED: Initialize the click sound ---
+  clickSfxAudio = new Audio('assets/COMM2754-2025-S1-A1w02-Earth-HoDucDuy-click.wav');
 
-  // --- MODIFIED: Setup UI controls after DOM is ready ---
+
+  // Setup UI controls after DOM is ready
   setupModal();
   setupSfxButton();
 }
@@ -147,14 +153,11 @@ function generatePalette() {
 function mouseMoved() {
     if (isModalOpen) return;
 
-    // The ripple effect is purely visual and should always happen on mouse move
     if (frameCount % 3 === 0) {
       ripples.push(new Ripple(createVector(mouseX, mouseY)));
     }
 
-    // --- MODIFIED: Sound is now conditional on the SFX button state ---
     if (isSfxEnabled) {
-      //handle hover sound
       if (!hoverActive) {
         hoverActive = true;
         hoverSfxAudio.currentTime = 0;
@@ -166,7 +169,7 @@ function mouseMoved() {
         hoverActive = false;
         hoverSfxAudio.pause();
         hoverSfxAudio.currentTime = 0;
-      }, 200); // Shortened timeout for better responsiveness
+      }, 200);
     }
 }
 
@@ -191,47 +194,57 @@ class Ripple {
   }
 }
 
-// --- MODIFIED: Added function to control the SFX button ---
+// --- MODIFIED: Added a helper function to play the click sound ---
+// This prevents having to rewrite the same two lines of code everywhere.
+function playClickSound() {
+    clickSfxAudio.currentTime = 0; // Rewind to the start
+    clickSfxAudio.play().catch(e => console.warn("Click SFX failed to play:", e));
+}
+
 function setupSfxButton() {
   const sfxButton = document.getElementById('sfx-button');
 
   sfxButton.addEventListener('click', () => {
-    isSfxEnabled = !isSfxEnabled; // Toggle the master sound flag
+    // --- MODIFIED: Play click sound on interaction ---
+    playClickSound();
+
+    isSfxEnabled = !isSfxEnabled;
 
     if (isSfxEnabled) {
-      // Turning sound ON
       sfxButton.textContent = 'SFX: ON';
       sfxButton.classList.add('sfx-on');
       
-      // Play ambience. This first user interaction allows audio to play.
       ambienceAudio.play().catch(e => console.error("Ambience play failed:", e));
       ambienceStarted = true;
 
     } else {
-      // Turning sound OFF
       sfxButton.textContent = 'SFX: OFF';
       sfxButton.classList.remove('sfx-on');
       
-      // Pause all audio
       ambienceAudio.pause();
       hoverSfxAudio.pause();
       
-      // Reset hover sound state
       hoverActive = false;
       clearTimeout(hoverTimeout);
     }
   });
 }
 
-// --- Functions to control the modal ---
-
 function setupModal() {
   const infoButton = document.getElementById('info-button');
   const modalOverlay = document.getElementById('info-modal-overlay');
   const closeButton = document.querySelector('.close-button');
 
-  infoButton.addEventListener('click', openModal);
-  closeButton.addEventListener('click', closeModal);
+  // --- MODIFIED: Updated listeners to play click sound ---
+  infoButton.addEventListener('click', () => {
+    playClickSound();
+    openModal();
+  });
+
+  closeButton.addEventListener('click', () => {
+    playClickSound();
+    closeModal();
+  });
 
   modalOverlay.addEventListener('click', (event) => {
     if (event.target === modalOverlay) closeModal();
@@ -246,9 +259,8 @@ function openModal() {
   const modalOverlay = document.getElementById('info-modal-overlay');
   modalOverlay.classList.add('visible');
   isModalOpen = true;
-  noLoop(); // Pause the p5.js draw loop
+  noLoop(); 
   
-  // Pause audio if it's playing
   if (ambienceStarted) ambienceAudio.pause();
   hoverSfxAudio.pause();
   clearTimeout(hoverTimeout);
@@ -259,9 +271,8 @@ function closeModal() {
   const modalOverlay = document.getElementById('info-modal-overlay');
   modalOverlay.classList.remove('visible');
   isModalOpen = false;
-  loop(); // Resume the p5.js draw loop
+  loop(); 
 
-  // Resume ambience audio ONLY if it had been started AND the sfx button is still on
   if (ambienceStarted && isSfxEnabled) {
     ambienceAudio.play().catch(e => console.warn(e));
   }
