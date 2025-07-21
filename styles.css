@@ -1,0 +1,124 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #001f3f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* Added to prevent scrollbars when modal is not visible */
+  overflow: hidden; 
+}
+
+canvas {
+  border: 1px solid #ffffff22;
+}
+
+/* --- MODIFIED: Grouped buttons into a container for better layout --- */
+.button-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px; /* Adds space between buttons */
+  z-index: 999; /* Ensure it's above the canvas */
+}
+
+/* --- MODIFIED: Removed position from individual button --- */
+#info-button {
+  padding: 10px 20px;
+  background-color: #ffffff22;
+  border: 1px solid #ffffff44;
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#info-button:hover {
+  background-color: #ffffff44;
+}
+
+/* --- MODIFIED: Added styles for the new SFX button --- */
+#sfx-button {
+  padding: 10px 20px;
+  background-color: #555; /* Default gray color */
+  border: 1px solid #ffffff44;
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  width: 100px; /* Fixed width for consistent look */
+  text-align: center;
+}
+
+/* Style for when SFX is ON */
+#sfx-button.sfx-on {
+  background-color: #00FFFF; /* Cyan color */
+  color: #001f3f; /* Dark text for contrast */
+}
+
+
+/* The modal overlay (the dark background) */
+#info-modal-overlay {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Make sure it's on top of everything */
+}
+
+/* The actual modal popup box */
+.modal-content {
+  background: #001f3f;
+  color: #eee;
+  padding: 30px 40px;
+  border-radius: 8px;
+  border: 1px solid #ffffff44;
+  width: 90%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  font-family: sans-serif;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.modal-content p {
+  line-height: 1.6;
+}
+
+/* The close 'X' button */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-button:hover {
+  color: #fff;
+}
+
+/* This class will be added by JavaScript to show the modal */
+#info-modal-overlay.visible {
+  display: flex;
+}
