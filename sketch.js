@@ -22,7 +22,7 @@ function setup() {
   createCanvas(1920, 1080);
   colorMode(HSB, 360, 100, 100);
   noFill();
-  baseHue = random(200, 220); // blue-ish range
+  baseHue = random(200, 220); // blue range of color
   center = createVector(width / 2, height / 2);
 
   // generate dashed ellipses
@@ -66,7 +66,7 @@ function draw() {
 
       let mx = mouseX - center.x; 
       let my = mouseY - center.y;
-      let d = dist(x, y, mx, my); //calculate the distance from d to cursor
+      let d = dist(x, y, mx, my); // distance from d to cursor
 
       if (d < 100) {
         stroke(random(200, 240), 80, 100);
