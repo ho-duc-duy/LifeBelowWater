@@ -61,7 +61,7 @@ function draw() {
     for (let i = 0; i < TWO_PI; i += angleStep * 2) { //dash effect
       let angle = i;
       let dashRadius = e.radius;
-      let x = cos(angle) * dashRadius;
+      let x = cos(angle) * dashRadius; //calculate the starting point of dash
       let y = sin(angle) * dashRadius;
 
       let mx = mouseX - center.x; 
