@@ -55,7 +55,7 @@ function draw() {
   background(baseHue, 80, 15);
   translate(center.x, center.y);
 
-  for (let e of ellipses) {
+  for (let e of ellipses) { // 'e' stand for each ellipse in the ellipse array
     strokeWeight(e.strokeWeight);
     let angleStep = TWO_PI / e.dashCount; //dash gap
     for (let i = 0; i < TWO_PI; i += angleStep * 2) { //dash effect
