@@ -84,7 +84,7 @@ function draw() {
 
 //mouse interaction
 function mouseMoved() {
-  if (isModalOpen) return;
+  if (isModalOpen) return; // don't trigger sound if text box is open
 
   if (isSfxEnabled) {
     if (!hoverActive) {
@@ -92,7 +92,7 @@ function mouseMoved() {
       hoverSfxAudio.currentTime = 0;
       hoverSfxAudio.play().catch(e => console.warn('Hover sound failed:', e));
     }
-
+    // reset the timeout every time the mouse moves
     clearTimeout(hoverTimeout);
     hoverTimeout = setTimeout(() => {
       hoverActive = false;
@@ -104,7 +104,7 @@ function mouseMoved() {
 
 //sound section
 function playClickSound() {
-  clickSfxAudio.currentTime = 0; // Rewind to the start
+  clickSfxAudio.currentTime = 0; // go back to the start of the sound
   clickSfxAudio.play().catch(e => console.warn("Click SFX failed to play:", e));
 }
 
@@ -114,16 +114,16 @@ function setupSfxButton() {
   sfxButton.addEventListener('click', () => {
     playClickSound();
 
-    isSfxEnabled = !isSfxEnabled;
+    isSfxEnabled = !isSfxEnabled; // toggle state
 
-    if (isSfxEnabled) {
+    if (isSfxEnabled) { //when the sfx turned on
       sfxButton.textContent = 'SFX: ON';
       sfxButton.classList.add('sfx-on');
 
       ambienceAudio.play().catch(e => console.error("Ambience play failed:", e));
       ambienceStarted = true;
 
-    } else {
+    } else { //when the sfx turned off
       sfxButton.textContent = 'SFX: OFF';
       sfxButton.classList.remove('sfx-on');
 
@@ -136,6 +136,7 @@ function setupSfxButton() {
   });
 }
 
+//set up the information text box
 function setupModal() {
   const infoButton = document.getElementById('info-button');
   const modalOverlay = document.getElementById('info-modal-overlay');
@@ -164,7 +165,7 @@ function openModal() {
   const modalOverlay = document.getElementById('info-modal-overlay');
   modalOverlay.classList.add('visible');
   isModalOpen = true;
-  noLoop(); 
+  noLoop(); // pause the sketch
 
   if (ambienceStarted) ambienceAudio.pause();
   hoverSfxAudio.pause();
@@ -176,7 +177,7 @@ function closeModal() {
   const modalOverlay = document.getElementById('info-modal-overlay');
   modalOverlay.classList.remove('visible');
   isModalOpen = false;
-  loop(); 
+  loop(); // resume the sketch
 
   if (ambienceStarted && isSfxEnabled) {
     ambienceAudio.play().catch(e => console.warn(e));
