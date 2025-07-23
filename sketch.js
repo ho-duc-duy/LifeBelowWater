@@ -1,3 +1,4 @@
+//Released under GPL3. more information: https://www.gnu.org/licenses/gpl-3.0.en.html
 //Inspirational references:
 //Interactive Ripple Grid – CodePen by VoXelo – https://codepen.io/VoXelo/pen/LEYaMbJ
 //“p5.js Spiral Wave Pattern” – YouTube video URL: https://www.youtube.com/watch?v=zR5onrdWCeY
