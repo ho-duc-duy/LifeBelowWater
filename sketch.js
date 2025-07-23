@@ -13,8 +13,6 @@ let clickSfxAudio;
 let ambienceStarted = false;
 let hoverActive = false;
 let hoverTimeout;
-
-// state variables
 let isModalOpen = false;
 let isSfxEnabled = false;
 
@@ -63,21 +61,19 @@ function draw() {
       let dashRadius = e.radius;
       let x = cos(angle) * dashRadius; //calculate the starting point of dash
       let y = sin(angle) * dashRadius;
+      let x2 = cos(angle + angleStep) * dashRadius; //calculate the end point of dash
+      let y2 = sin(angle + angleStep) * dashRadius;
+      line(x, y, x2, y2); //draw a line between position (x, y) and (x2, y2)
 
       let mx = mouseX - center.x; 
       let my = mouseY - center.y;
-      let d = dist(x, y, mx, my); // distance from d to cursor
+      let d = dist(x, y, mx, my); // distance from dash to cursor
 
       if (d < 100) {
         stroke(random(200, 240), 80, 100);
       } else {
         stroke(e.color);
       }
-
-      let x2 = cos(angle + angleStep) * dashRadius; //calculate the end point of dash
-      let y2 = sin(angle + angleStep) * dashRadius;
-
-      line(x, y, x2, y2); //draw a line between position (x, y) and (x2, y2)
     }
   }
 }
