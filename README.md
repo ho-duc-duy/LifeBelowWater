@@ -1,6 +1,6 @@
-# Spiral Echoes
+# Life Below Water
 
-“Spiral Echoes” is an abstract digital artwork that simulates the infinity and mystery of the ocean through a spiral network that is randomly generated each time it is run. Initially, the entire scene is muted in tone – symbolizing a calm ocean that is shrouded in noise pollution. As the viewer hovers over the canvas, ripples of light appear, spreading and awakening colored highlights – symbolizing the positive impact of humans listening to and protecting the ocean. Background audio and hover effects contribute to a multi-sensory experience where every movement has meaning. The piece is a gentle yet profound reminder to engage with the ocean consciously – to not only echo, but also be heard.
+“Life Below Water” is an abstract digital artwork that simulates the infinity and mystery of the ocean through a spiral network that is randomly generated each time it is run. Initially, the entire scene is muted in tone – symbolizing a calm ocean that is shrouded in noise pollution. As the viewer clicks or hovers over the canvas, ripples of light appear, spreading and awakening colored highlights – symbolizing the positive impact of humans listening to and protecting the ocean. Background audio and hover effects contribute to a multi-sensory experience where every movement has meaning. The piece is a gentle yet profound reminder to engage with the ocean consciously – to not only echo, but also be heard.
 
 ---
 
@@ -32,21 +32,8 @@ This artwork aims to raise awareness about underwater noise pollution and the im
 1. Open `index.html` in a modern web browser (Chrome, Firefox, Edge).
 2. Move your mouse across the screen to create ripple waves.
 3. Ripples will push away particles and light up nearby areas.
-4. Reload the page to generate a completely new ocean pattern.
-5. Let the canvas idle to slowly fade colors back to default.
-
----
-
-## File Structure
-code/
-├── index.html
-├── sketch.js
-├── README.md
-├── LICENSE.txt
-└── assets/
-    ├── COMM2754-2025-S1-A1w02-Earth-HoDucDuy-ambience.mp3
-    └── COMM2754-2025-S1-A1w02-Earth-HoDucDuy-hover.mp3
-
+4. Reload the page to generate a new ocean pattern with random properties of dashed ellipse.
+5. Enjoy the wide range of sound effects.
 
 ---
 
@@ -54,7 +41,6 @@ code/
 
 - Resolution: 1920 × 1080 pixels (full screen)
 - Built with p5.js and JavaScript
-- Code is original (AI-assisted and manually edited)
 - Functions are generally short and well-commented
 - No external libraries used except for the p5.js CDN
 - index.html provided for launching in a browser
