@@ -1,44 +1,121 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background: #001f3f;
+  font-family: "Winky Rough", system-ui;
+  color: #333;
+  background: linear-gradient(to bottom, #f9f9f9 0%, #f9f9f9 70%, #001f3f 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+.page-container {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.content-section {
+  display: flex;
+  padding: 100px 40px; 
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.vertical-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 5em; 
+  color: #56a5d9;
+  margin: 0;
+  padding-right: 60px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.main-text {
+  max-width: 800px;
+}
+
+.main-text h2 {
+  font-size: 2em;
+  margin-top: 0;
+}
+
+.main-text h3 {
+  font-size: 1.4em;
+  margin-top: 40px;
+}
+
+.main-text p, .main-text blockquote {
+  font-size: 1.1em;
+  line-height: 1.7;
+}
+
+.main-text blockquote {
+  border-left: 4px solid #ccc;
+  padding-left: 20px;
+  margin-left: 0;
+  font-style: italic;
+}
+
+.credits {
+  font-size: 0.9em !important;
+  color: #666;
+}
+
+/* --- Bubble Animation & Parallax --- */
+.bubble-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  transition: background-color 0.5s ease-in-out;
+  animation-name: float-up;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px) scale(0);
+    opacity: 0;
+  }
+}
+
+/* --- P5.js Canvas Section --- */
+#canvas-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  overflow: hidden; 
-  font-family: "Winky Rough", system-ui;
+  padding-top: 50px; 
+  position: relative;
 }
 
 canvas {
   border: 1px solid #ffffff22;
 }
 
-.button-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: flex;
-  gap: 10px; 
-  z-index: 999; 
-}
-
-#info-button {
-  padding: 10px 20px;
-  background-color: #ffffff22;
-  border: 1px solid #ffffff44;
-  color: #fff;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-#info-button:hover {
-  background-color: #ffffff44;
-}
-
+/* --- Button Styling --- */
 #sfx-button {
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
   padding: 10px 20px;
   background-color: #555; 
   border: 1px solid #ffffff44;
@@ -49,71 +126,10 @@ canvas {
   transition: background-color 0.3s, color 0.3s;
   width: 110px;
   text-align: center;
+  z-index: 10;
 }
 
 #sfx-button.sfx-on {
   background-color: #00FFFF;
   color: #001f3f;
-}
-
-
-#info-modal-overlay {
-  display: none; 
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); 
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; 
-}
-
-.modal-content {
-  background: #001f3f;
-  color: #eee;
-  padding: 30px 40px;
-  border-radius: 8px;
-  border: 1px solid #ffffff44;
-  width: 90%;
-  max-width: 800px;
-  max-height: 80vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-}
-
-.modal-content h2 {
-  margin-top: 0;
-  color: #fff;
-  font-size: 2.2em;
-}
-
-.modal-content h3 {
-  font-size: 1.5em;
-}
-
-.modal-content p {
-  line-height: 1.6;
-  font-size: 1.1em;
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 40px;
-  font-weight: bold;
-  color: #aaa;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.close-button:hover {
-  color: #fff;
-}
-
-#info-modal-overlay.visible {
-  display: flex;
 }
