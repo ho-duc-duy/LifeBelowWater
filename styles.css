@@ -7,7 +7,7 @@ body {
   padding: 0;
   font-family: "Winky Rough", system-ui;
   color: #333;
-  background: linear-gradient(to bottom, #f9f9f9 0%, #f9f9f9 70%, #001f3f 100%);
+  background: linear-gradient(to bottom, #f9f9f9 0%, #f9f9f9 70%, #001f3f 120%);
   background-attachment: fixed;
   overflow-x: hidden;
 }
@@ -19,7 +19,7 @@ body {
 
 .content-section {
   display: flex;
-  padding: 100px 40px; 
+  padding: 50px 40px; 
   min-height: 100vh;
   box-sizing: border-box;
   position: relative;
@@ -29,7 +29,7 @@ body {
 .vertical-title {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  font-size: 5em; 
+  font-size: 4.2em; 
   color: #56a5d9;
   margin: 0;
   padding-right: 60px;
@@ -48,10 +48,11 @@ body {
 
 .main-text h3 {
   font-size: 1.4em;
-  margin-top: 40px;
+  margin: 0px;
 }
 
 .main-text p, .main-text blockquote {
+  margin-top: 0px;
   font-size: 1.1em;
   line-height: 1.7;
 }
